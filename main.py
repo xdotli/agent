@@ -79,7 +79,7 @@ def create_agent(
 
     all_tools = [
         make_tool_for_my_notes(service_context),
-        make_tool_for_wikipedia(service_context),
+        # make_tool_for_wikipedia(service_context),
         make_tool_to_memory(service_context)
     ]
     # TODO: When we have too many tools for the Agent to comprehend in one go (In other words, the sheer amounts of two

@@ -1,15 +1,17 @@
 """
 Make a tool for memorizing information (save user input to the vector database).
 """
+import uuid
 from llama_index import (
     ServiceContext,
+    VectorStoreIndex
 )
 from llama_index.tools import FunctionTool, ToolMetadata
 from pydantic import BaseModel
 import tool_for_my_notes
 from llama_index.agent import ReActAgent
 from llama_index.llms import OpenAILike
-
+from llama_index.schema import TextNode 
 
 def make_tool(service_context:ServiceContext):
     print("tool_to_memorize.py: make_tool !!!!!!!!!!!!!!!!!!!")
@@ -28,6 +30,17 @@ def make_tool(service_context:ServiceContext):
             file.write(input + '\n')
         tool_for_my_notes.SHOULD_IGNORE_PERSISTED_INDEX = True
 
+        formatted_time = "2022-01-01T00:00:00Z"
+
+        node = TextNode(
+            text=input,
+            id_=str(uuid.uuid4()),
+            metadata={"when": formatted_time},
+        )
+        # VectorStoreIndex.build_index_from_nodes(,nodes=[node], service_context=service_context)
+        # VectorStoreIndex.insert_nodes(self=VectorStoreIndex, nodes=[node])
+
+
     class MemorizeToolSchema(BaseModel):
         input: str
 
@@ -35,7 +48,7 @@ def make_tool(service_context:ServiceContext):
             memorize,
             metadata=ToolMetadata(
                 name="memorize_information",
-                description="""If the user's input is not a question, but a statement, save the statement.""",
+                description="""If the user's input is not a question, but a statement, pass the exact user input as the input for this function tool.""",
                 fn_schema=MemorizeToolSchema,
             ),
         )
