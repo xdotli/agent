@@ -8,6 +8,7 @@ from llama_index.llms import OpenAILike
 from rich.logging import RichHandler
 
 from tool_for_my_notes import make_tool as make_tool_for_my_notes
+from tool_to_memory import make_tool as make_tool_to_memory
 
 # https://rich.readthedocs.io/en/latest/logging.html#handle-exceptions
 logging.basicConfig(
@@ -79,6 +80,7 @@ def create_agent(
     all_tools = [
         make_tool_for_my_notes(service_context),
         make_tool_for_wikipedia(service_context),
+        make_tool_to_memory(service_context)
     ]
     # TODO: When we have too many tools for the Agent to comprehend in one go (In other words, the sheer amounts of two
     #  descriptions has taken most of the context window.), try `custom_obj_retriever` in
