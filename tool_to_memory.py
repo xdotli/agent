@@ -38,7 +38,7 @@ def make_tool(service_context:ServiceContext):
             metadata={"when": formatted_time},
         )
         # VectorStoreIndex.build_index_from_nodes(,nodes=[node], service_context=service_context)
-        # VectorStoreIndex.insert_nodes(self=VectorStoreIndex, nodes=[node])
+        VectorStoreIndex.insert_nodes(self=VectorStoreIndex, nodes=[node])
 
 
     class MemorizeToolSchema(BaseModel):
