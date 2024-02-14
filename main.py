@@ -10,7 +10,7 @@ from rich.logging import RichHandler
 from tool_for_my_notes import make_tool as make_tool_for_my_notes
 from tool_to_memory import make_tool as make_tool_to_memory
 
-# https://rich.readthedocs.io/en/latest/logging.html#handle-exceptions
+# https://rich.readthedocs.io/en/latest/logging.html#handle-exceptions 
 logging.basicConfig(
     # level=logging.DEBUG,
     format="%(message)s",
